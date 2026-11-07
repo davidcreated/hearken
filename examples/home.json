@@ -1,0 +1,18 @@
+{
+  "devices": [
+    {"id": "heater", "name": "Living Room Heater"},
+    {"id": "lamp", "name": "Lamp"},
+    {"id": "kettle", "name": "Kettle"},
+    {"id": "fridge", "name": "Fridge"}
+  ],
+  "spaces": [
+    {"id": "living", "name": "Living Room", "deviceIds": ["heater", "lamp"]},
+    {"id": "kitchen", "name": "Kitchen", "deviceIds": ["kettle", "fridge"]}
+  ],
+  "modes": [
+    {"id": "home", "name": "Home"},
+    {"id": "away", "name": "Away"},
+    {"id": "kitchen-away", "name": "Away", "voiceName": "Kitchen Away", "spaceId": "kitchen", "spaceName": "Kitchen"},
+    {"id": "movie", "name": "Movie night"}
+  ]
+}
