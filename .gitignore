@@ -1,0 +1,11 @@
+/hearken
+/dist/
+*.test
+*.out
+.DS_Store
+
+# Audio and model files are never committed; see docs/DATA.md.
+/data/
+*.wav
+*.flac
+*.onnx
