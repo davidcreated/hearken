@@ -1,0 +1,27 @@
+{
+  "about": "Shortcuts match what was said exactly, ignoring case, punctuation, the wake phrase and please. Nicknames ignore spaces too, so initials match however they were heard. expect is the id or alias found, or null.",
+  "wake": "^((hey|he|hi) (\\w+ ?)?|ohm ?|home ?)(flex|flicks|flecks|flicts) ",
+  "shortcuts": [
+    {"id": "s1", "phrase": "Movie time", "actions": [
+      {"kind": "switch_space", "id": "living", "name": "Living Room", "on": false},
+      {"kind": "switch_device", "id": "D9", "name": "TV plug", "on": true},
+      {"kind": "turn_on_mode", "id": "m1", "name": "Cinema"}
+    ]}
+  ],
+  "nicknames": [
+    {"alias": "AC", "target": "space", "targetId": "bedroom", "targetName": "Bedroom"},
+    {"alias": "Big Light", "target": "device", "targetId": "D1", "targetName": "Ceiling lamp"}
+  ],
+  "shortcutCases": [
+    {"say": "Hey Ohmflex, movie time!", "expect": "s1"},
+    {"say": "MOVIE TIME please", "expect": "s1"},
+    {"say": "movie time tonight", "expect": null}
+  ],
+  "nicknameCases": [
+    {"say": "A.C.", "expect": "AC"},
+    {"say": "a c", "expect": "AC"},
+    {"say": "ac", "expect": "AC"},
+    {"say": "the big light", "expect": null},
+    {"say": "BIG LIGHT", "expect": "Big Light"}
+  ]
+}
