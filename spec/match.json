@@ -1,0 +1,98 @@
+{
+  "about": "Spoken names matched to a home. expect names what was chosen: device, space (with the devices in it), mode, ambiguous (the options' ids in order), everything, or none. Cases with command first parse the text (no wake phrase), then resolve it.",
+  "homes": {
+    "flat": {
+      "devices": [
+        {"id": "1", "hardwareId": "D-1", "name": "Living Room Heater"},
+        {"id": "2", "hardwareId": "D-2", "name": "Plug"},
+        {"id": "3", "hardwareId": "D-3", "name": "plug"},
+        {"id": "4", "hardwareId": "D-4", "name": "Kettle"}
+      ],
+      "spaces": [
+        {"id": "s1", "name": "Kitchen", "deviceIds": ["4"]}
+      ],
+      "modes": [
+        {"id": "home", "name": "Home"},
+        {"id": "draft", "name": "Guest", "draft": true},
+        {"id": "party", "name": "Party", "voiceName": "Celebration"}
+      ]
+    },
+    "heater_room": {
+      "devices": [
+        {"id": "1", "hardwareId": "D-1", "name": "Living Room Heater"},
+        {"id": "4", "hardwareId": "D-4", "name": "Kettle"}
+      ],
+      "spaces": [
+        {"id": "s2", "name": "Heater", "deviceIds": ["D-1"]}
+      ],
+      "modes": []
+    },
+    "focus": {
+      "devices": [],
+      "spaces": [],
+      "modes": [
+        {"id": "first", "name": "Focus"},
+        {"id": "second", "name": "Focus", "spaceId": "s1", "spaceName": "Office"}
+      ]
+    },
+    "boss_time": {
+      "devices": [],
+      "spaces": [],
+      "modes": [
+        {"id": "o", "name": "Boss Time", "voiceName": "Office Boss Time", "spaceId": "office", "spaceName": "Office"},
+        {"id": "g", "name": "Boss Time", "voiceName": "Boss Time"},
+        {"id": "l", "name": "Boss Time", "voiceName": "Library Boss Time", "spaceId": "library", "spaceName": "Library"}
+      ]
+    },
+    "boss_time_spaces_only": {
+      "devices": [],
+      "spaces": [],
+      "modes": [
+        {"id": "o", "name": "Boss Time", "voiceName": "Office Boss Time", "spaceId": "office", "spaceName": "Office"},
+        {"id": "l", "name": "Boss Time", "voiceName": "Library Boss Time", "spaceId": "library", "spaceName": "Library"}
+      ]
+    },
+    "two_kitchens": {
+      "devices": [],
+      "spaces": [],
+      "modes": [
+        {"id": "k1", "name": "Kitchen Home", "voiceName": "Kitchen Home", "spaceId": "k1", "spaceName": "Kitchen"},
+        {"id": "k2", "name": "Kitchen Home", "voiceName": "Kitchen Home 2", "spaceId": "k2", "spaceName": "Kitchen"}
+      ]
+    },
+    "space_modes": {
+      "devices": [{"id": "1", "name": "Lamp"}],
+      "spaces": [],
+      "modes": [
+        {"id": "home", "name": "Home"},
+        {"id": "a-home", "name": "Home", "spaceId": "a", "spaceName": "Space A"},
+        {"id": "b-home", "name": "Home", "spaceId": "b", "spaceName": "Space B"}
+      ]
+    }
+  },
+  "cases": [
+    {"home": "flat", "say": "living room heater", "expect": {"device": "1"}},
+    {"home": "flat", "say": "kitchen", "expect": {"space": "s1", "devices": ["4"]}},
+    {"home": "heater_room", "say": "heater room", "expect": {"space": "s2", "devices": ["1"]}},
+    {"home": "heater_room", "say": "heater", "expect": {"space": "s2", "devices": ["1"]}},
+    {"home": "flat", "say": "plug", "expect": {"ambiguous": ["2", "3"]}},
+    {"home": "flat", "say": "heater", "expect": {"device": "1"}},
+    {"home": "flat", "say": "garage door", "expect": {"none": true}},
+    {"home": "flat", "say": "home", "modesOnly": true, "expect": {"mode": "home"}},
+    {"home": "flat", "say": "celebration", "expect": {"mode": "party"}},
+    {"home": "flat", "say": "guest", "modesOnly": true, "expect": {"none": true}},
+    {"home": "focus", "say": "focus", "modesOnly": true, "expect": {"ambiguous": ["first", "second"]}},
+
+    {"home": "boss_time", "say": "boss time", "modesOnly": true, "expect": {"mode": "g"}},
+    {"home": "boss_time", "say": "library boss time", "modesOnly": true, "expect": {"mode": "l"}},
+    {"home": "boss_time_spaces_only", "say": "boss time", "modesOnly": true, "expect": {"ambiguous": ["o", "l"]}},
+    {"home": "two_kitchens", "say": "kitchen home 2", "modesOnly": true, "expect": {"mode": "k2"}},
+    {"home": "two_kitchens", "say": "kitchen home", "modesOnly": true, "expect": {"mode": "k1"}},
+
+    {"home": "space_modes", "command": true, "say": "set Space A to Home mode", "expect": {"mode": "a-home"}},
+    {"home": "space_modes", "command": true, "say": "put space b in home mode", "expect": {"mode": "b-home"}},
+    {"home": "space_modes", "command": true, "say": "turn on home mode", "expect": {"ambiguous": ["home", "a-home", "b-home"]}},
+    {"home": "space_modes", "command": true, "say": "turn off everything", "expect": {"everything": ["1"]}},
+    {"home": "space_modes", "command": true, "say": "turn off the lamp", "expect": {"device": "1"}}
+  ]
+}
