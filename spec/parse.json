@@ -1,0 +1,41 @@
+{
+  "about": "Spoken commands and what they mean. expect is null when the text is not a command. wake is the wake phrase pattern the cases use.",
+  "wake": "^((hey|he|hi) (\\w+ ?)?|ohm ?|home ?)(flex|flicks|flecks|flicts) ",
+  "cases": [
+    {"say": "Turn off the living room heater.", "expect": {"action": "off", "kind": "device_or_space", "target": "living room heater"}},
+    {"say": "switch the fan on", "expect": {"action": "on", "kind": "device_or_space", "target": "fan"}},
+    {"say": "Hey Ohmflex, please turn on the kettle", "expect": {"action": "on", "kind": "device_or_space", "target": "kettle"}},
+    {"say": "Hey, turn on the kettle", "expect": {"action": "on", "kind": "device_or_space", "target": "kettle"}},
+    {"say": "hey on flex turn off the kettle", "expect": {"action": "off", "kind": "device_or_space", "target": "kettle"}},
+    {"say": "Hey flex, switch on the fan", "expect": {"action": "on", "kind": "device_or_space", "target": "fan"}},
+    {"say": "he unflicts turn on the kettle", "expect": {"action": "on", "kind": "device_or_space", "target": "kettle"}},
+    {"say": "Hey Home Flex, turn off the kettle", "expect": {"action": "off", "kind": "device_or_space", "target": "kettle"}},
+    {"say": "Is the fridge on?", "expect": {"action": "status", "kind": "device_or_space", "target": "fridge"}},
+    {"say": "is the fridge switched off", "expect": {"action": "status", "kind": "device_or_space", "target": "fridge"}},
+    {"say": "turn off everything in the kitchen", "expect": {"action": "off", "kind": "device_or_space", "target": "kitchen"}},
+    {"say": "turn on all devices in the bedroom", "expect": {"action": "on", "kind": "device_or_space", "target": "bedroom"}},
+
+    {"say": "what is the weather", "expect": null},
+    {"say": "turn off", "expect": null},
+    {"say": "", "expect": null},
+
+    {"say": "turn off Home mode", "expect": {"action": "off", "kind": "mode", "target": "home"}},
+    {"say": "is Home mode on", "expect": {"action": "status", "kind": "mode", "target": "home"}},
+
+    {"say": "turn on test two", "expect": {"action": "on", "kind": "device_or_space", "target": "test 2"}},
+    {"say": "turn on test to", "expect": {"action": "on", "kind": "device_or_space", "target": "test 2"}},
+    {"say": "turn on test too", "expect": {"action": "on", "kind": "device_or_space", "target": "test 2"}},
+    {"say": "turn off test twenty two", "expect": {"action": "off", "kind": "device_or_space", "target": "test 22"}},
+
+    {"say": "Set Space one to Home mode", "expect": {"action": "on", "kind": "mode", "target": "home", "space": "space 1"}},
+    {"say": "put the kitchen in away mode", "expect": {"action": "on", "kind": "mode", "target": "away", "space": "kitchen"}},
+    {"say": "switch bedroom into night mode", "expect": {"action": "on", "kind": "mode", "target": "night", "space": "bedroom"}},
+    {"say": "Hey Ohmflex, set Space A to Home mode", "expect": {"action": "on", "kind": "mode", "target": "home", "space": "space a"}},
+    {"say": "activate party mode", "expect": {"action": "on", "kind": "mode", "target": "party"}},
+    {"say": "turn on home mode", "expect": {"action": "on", "kind": "mode", "target": "home"}},
+
+    {"say": "turn off everything", "expect": {"action": "off", "kind": "everything", "target": "everything"}},
+    {"say": "switch off all devices", "expect": {"action": "off", "kind": "everything", "target": "all devices"}},
+    {"say": "turn on all devices", "expect": {"action": "on", "kind": "everything", "target": "all devices"}}
+  ]
+}
